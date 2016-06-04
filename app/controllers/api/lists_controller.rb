@@ -8,8 +8,17 @@ class Api::ListsController< ApiController
     if list.save
       render json: list
     else
-      render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: list.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+
+  def update
+    list = List.find(params[:id])
+      if list.update(lists_params)
+        render json: list
+      else
+        render json: { errors: list.errors.full_messages }, status: :unprocessable_entity
+      end
   end
 
   def destroy
@@ -19,7 +28,7 @@ class Api::ListsController< ApiController
 
       render json: {}, status: :no_content
     rescue ActiveRecord::RecordNotFound
-     render :json => {}, :status => :not_found
+      render :json => {}, :status => :not_found
     end
   end
 

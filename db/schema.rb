@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140313002941) do
 
-  create_table "items", force: true do |t|
+  create_table "items", force: :cascade do |t|
     t.integer  "list_id"
     t.string   "description"
     t.boolean  "completed",   default: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140313002941) do
     t.datetime "updated_at"
   end
 
-  create_table "lists", force: true do |t|
+  create_table "lists", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.string   "permissions", default: "private"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140313002941) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
     t.datetime "created_at"

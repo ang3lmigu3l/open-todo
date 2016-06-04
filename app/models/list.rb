@@ -1,6 +1,9 @@
 class List < ActiveRecord::Base
   belongs_to :user
-  has_many :items
+  has_many :items, dependent: :destroy
+
+  validates :permissions, inclusion: { in: %w(public viewable private),
+    message: "%{value} not valid. Must be public or private" }
 
   def self.permission_options
     %w(private viewable open)
